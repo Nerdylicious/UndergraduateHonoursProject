@@ -18,13 +18,3 @@ def calculate_gram_matrix(strings):
     #create an n x n gram matrix 
     gram_matrix = np.reshape(distances, (-1, n))
     return gram_matrix
-
-strings = [
-    "ACCTGCGGATATTAATTAACTGACC",
-    "TCCTCTATTAATCGGTGGATGTCGG",
-    "AGAATTAATTACTGATATTCTTTCA",
-    "CATAGTCGGCAGCCGTCACGACCCT"
-]
-
-gram_matrix = calculate_gram_matrix(strings)
-print gram_matrix
