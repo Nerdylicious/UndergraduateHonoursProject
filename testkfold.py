@@ -1,6 +1,8 @@
 import numpy as np
 from collections import OrderedDict
 from format_sample_data import *
+from sklearn import cross_validation
+from sklearn import svm
 from sklearn.cross_validation import KFold
 
 X = np.array([
@@ -18,6 +20,8 @@ Y = np.array([0, 1, 0, 1, 0, 1, 0, 1])
 
 kf = KFold(len(Y), 2, indices=False)
 print kf
+
+scores = []
 
 for train, test in kf:
     print train, test
@@ -50,3 +54,19 @@ for train, test in kf:
     test_labels = get_label_array(test_data)
     print test_gram_matrix
     print test_labels
+
+    clf = svm.SVC(kernel='precomputed')
+    print clf.fit(train_gram_matrix, train_labels)
+
+    test_labels.reverse()
+    print test_labels
+
+    print "Score:"
+    score = clf.score(test_gram_matrix, test_labels)
+    scores.append(score)
+    print score
+
+    print "Prediction:"
+    print clf.predict(test_gram_matrix)
+
+print "Accuracy: %0.2f (+/- %0.2f)" % (np.mean(scores), np.std(scores) * 2)
