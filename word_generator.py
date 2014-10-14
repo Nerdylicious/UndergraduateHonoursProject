@@ -6,4 +6,4 @@ def generate_random_word(char_set, size):
 
 def generate_similar_word(char_set, cutoff, common_sequence):
     random_sequence = generate_random_word(char_set, cutoff)
-    return random_sequence + common_sequence
+    return common_sequence + random_sequence
