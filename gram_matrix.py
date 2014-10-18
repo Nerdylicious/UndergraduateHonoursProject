@@ -5,13 +5,12 @@ from kc import *
 def calculate_gram_matrix(strings):
 
     n = len(strings)
-    print "Gram matrix dimensions: %d x %d" % (n, n)
 
     distances = []
     for s_i in strings:
         for s_j in strings:
-            NID = approximate_NID(s_i, s_j)
-            #print "i: %s, j: %s, NID: %f" % (s_i, s_j, NID)
+            #NID = approximate_NID(s_i, s_j)
+            NID = 1 - approximate_NID(s_i, s_j)
             distances.append(NID)
 
     #for reshaping 1d array, specify the dimensions to be n columns and the appropriate number of rows (specified by -1)

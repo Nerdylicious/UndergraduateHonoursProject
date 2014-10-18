@@ -58,7 +58,6 @@ for train, test in kf:
     clf = svm.SVC(kernel='precomputed')
     print clf.fit(train_gram_matrix, train_labels)
 
-    test_labels.reverse()
     print test_labels
 
     print "Score:"
