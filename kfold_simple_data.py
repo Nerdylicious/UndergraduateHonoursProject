@@ -18,8 +18,8 @@ X = np.array([
 
 Y = np.array([0, 1, 0, 1, 0, 1, 0, 1])
 
-kf = KFold(len(Y), 2, indices=False)
-print kf
+folds = 2
+kf = KFold(len(Y), folds, indices=False)
 
 scores = []
 
