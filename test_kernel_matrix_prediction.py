@@ -1,3 +1,4 @@
+#Purpose: Testing prediction of synthetic data (with no training/testing samples defined)
 import numpy as np
 from collections import OrderedDict
 from format_sample_data import *
@@ -10,11 +11,6 @@ synthetic_data = OrderedDict([
 
 gram_matrix = get_gram_matrix(synthetic_data)
 print gram_matrix
-
-print "Scaled:"
-min_max_scaler = preprocessing.MinMaxScaler()
-X_train_minmax = min_max_scaler.fit_transform(gram_matrix)
-print X_train_minmax
 
 labels = get_label_array(synthetic_data)
 print "Labels:"

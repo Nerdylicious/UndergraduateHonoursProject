@@ -28,7 +28,7 @@ for train, test in kf:
     X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
     
     print "Train:"
-    #print X_train, y_train
+    print X_train, y_train
 
     training_data = OrderedDict()
     for i in range(len(X_train)):
@@ -42,7 +42,7 @@ for train, test in kf:
     print train_labels
 
     print "Test:"
-    #print X_test, y_test
+    print X_test, y_test
 
     test_data = OrderedDict()
     for i in range(len(X_test)):

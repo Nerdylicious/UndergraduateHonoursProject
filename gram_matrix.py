@@ -9,6 +9,7 @@ def calculate_gram_matrix(strings):
     distances = []
     for s_i in strings:
         for s_j in strings:
+            #this calculation for NID does not work well with scikit-learn
             #NID = approximate_NID(s_i, s_j)
             NID = 1 - approximate_NID(s_i, s_j)
             distances.append(NID)
