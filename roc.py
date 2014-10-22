@@ -7,7 +7,7 @@ from sklearn import cross_validation, preprocessing, svm, datasets
 from sklearn.cross_validation import KFold
 from sklearn.metrics import roc_curve, auc
 
-N = 100
+N = 200
 char_set = ['A', 'T', 'C', 'G']
 size = 200
 random_proportion = 0.9
@@ -15,7 +15,7 @@ common_proportion = 0.1
 random_size = int(size * random_proportion)
 common_size = int(size * common_proportion)
 cutoff = random_size
-common_sequence = "TCTCCTAAAA"
+common_sequence = "GCTCCACAAC"
 
 data = build_synthetic_data_for_cross_validation(N, char_set, size, cutoff, common_sequence)
 X = data["values"]
@@ -27,7 +27,6 @@ half = int(len(Y)/2)
 scaler = preprocessing.MinMaxScaler()
 to_scale = True
 
-#for train, test in kf:
 X_train, X_test, y_train, y_test = X[:half], X[half:], Y[:half], Y[half:]
 
 training_data = OrderedDict()
@@ -68,6 +67,6 @@ pl.xlim([0.0, 1.0])
 pl.ylim([0.0, 1.0])
 pl.xlabel('False Positive Rate')
 pl.ylabel('True Positive Rate')
-pl.title('Receiver operating characteristic example')
+pl.title('Receiver operating characteristic (common sequence length=10)')
 pl.legend(loc="lower right")
 pl.show()

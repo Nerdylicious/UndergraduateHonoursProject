@@ -5,11 +5,6 @@ from format_sample_data import *
 from sklearn import cross_validation, preprocessing, svm
 from sklearn.cross_validation import KFold
 
-def scale(scaler, matrix):
-
-    scaled_matrix = scaler.fit_transform(matrix)
-    return scaled_matrix
-
 N = 100
 char_set = ['A', 'T', 'C', 'G']
 size = 100
@@ -28,7 +23,7 @@ folds = 2
 kf = KFold(len(Y), folds, indices=False)
 
 scores = [] 
-is_scaled = False 
+is_scaled = True
 
 for train, test in kf:
     
