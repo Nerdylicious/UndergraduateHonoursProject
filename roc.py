@@ -9,7 +9,7 @@ from sklearn.metrics import roc_curve, auc
 
 N = 200
 char_set = ['A', 'T', 'C', 'G']
-size = 200
+size = 400
 random_proportion = 0.9
 common_proportion = 0.1
 random_size = int(size * random_proportion)
