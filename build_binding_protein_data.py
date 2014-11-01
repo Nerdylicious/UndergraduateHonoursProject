@@ -1,17 +1,15 @@
 import numpy as np
 from parse_file import parse
 
-def build_binding_protein_data_for_cross_validation():
+def build_binding_protein_data_for_cross_validation(count):
 
     file_name = 'dataset_positive.fasta'
     file_type = 'fasta'
-    count = 150
 
     positive_sequences = parse(file_name, file_type, count)
 
     file_name = 'dataset_negative.fasta'
     file_type = 'fasta'
-    count = 150
 
     negative_sequences = parse(file_name, file_type, count)
 
