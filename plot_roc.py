@@ -6,7 +6,7 @@ from sklearn import cross_validation, preprocessing, svm, datasets
 from sklearn.cross_validation import KFold
 from sklearn.metrics import roc_curve, auc
 
-def plot(data, to_scale): 
+def plot(data, to_scale, plot_title): 
 
     X = data["values"]
     Y = data["labels"]
@@ -55,6 +55,6 @@ def plot(data, to_scale):
     pl.ylim([0.0, 1.0])
     pl.xlabel('False Positive Rate')
     pl.ylabel('True Positive Rate')
-    pl.title('Receiver operating characteristic')
+    pl.title(plot_title)
     pl.legend(loc="lower right")
     pl.show()
