@@ -18,7 +18,7 @@ X = np.array([
 
 Y = np.array([0, 1, 0, 1, 0, 1, 0, 1])
 
-folds = 2
+folds = 4 
 kf = KFold(len(Y), folds, indices=False)
 
 scores = []
@@ -60,10 +60,10 @@ for train, test in kf:
 
     print test_labels
 
-    print "Score:"
-    score = clf.score(test_gram_matrix, test_labels)
-    scores.append(score)
-    print score
+    #print "Score:"
+    #score = clf.score(test_gram_matrix, test_labels)
+    #scores.append(score)
+    #print score
 
     print "Prediction:"
     print clf.predict(test_gram_matrix)
