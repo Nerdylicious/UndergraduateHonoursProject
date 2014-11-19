@@ -1,69 +1,43 @@
+import numpy as np
 import random
-from build_operon_dictionary import *
-from parse_genbank import *
+from generate_operon_data import *
 
-def get_cds_pair(data):
+def build_operon_data_for_cross_validation(total_pos_samples, total_neg_samples, sample_size):
 
-    has_pair = False
+    positive_samples = get_positive_samples(total_pos_samples)
+    negative_samples = get_negative_samples(total_neg_samples)
+    print positive_samples
+    print negative_samples
 
-    while not has_pair:
+    data = {}
+    sequence_data = []
+    labels = []
 
-        randnum = random.randint(1, 4403)
+    sample_dictionary = {}
+    count = 0
+    while count < sample_size:
+        to_add_pos_sequence = True
+        while to_add_pos_sequence:
+            rand_index = random.randint(0, len(positive_samples) - 1)
+            sequence = positive_samples[rand_index]
+            if not sequence in sample_dictionary:
+                sequence_data.append(sequence)
+                labels.append(1)
+                sample_dictionary[sequence] = None
+                count = count + 1
+                to_add_pos_sequence = False
+        to_add_neg_sequence = True
+        while to_add_neg_sequence:
+            rand_index = random.randint(0, len(negative_samples) - 1)
+            sequence = negative_samples[rand_index]
+            if not sequence in sample_dictionary:
+                sequence_data.append(sequence)
+                labels.append(0)
+                sample_dictionary[sequence] = None
+                count = count + 1
+                to_add_neg_sequence = False
 
-        locus_tag_1 = randnum
-        locus_tag_2 = randnum + 1
-
-        if locus_tag_1 in data and locus_tag_2 in data: 
-            cds_1 = data[locus_tag_1]
-            cds_2 = data[locus_tag_2]
-
-            cds_pair = (cds_1, cds_2)
-            has_pair = True
-
-    return cds_pair 
-
-operons = get_operon_dictionary()
-print operons
-
-file_name = "NC_000913.gbk"
-file_type = "genbank"
-data = parse(file_name, file_type)
-
-positive_samples = {}
-negative_samples = {}
-
-while len(positive_samples) < 250:
-
-    cds_pair = get_cds_pair(data)
-    cds_1 = cds_pair[0]
-    cds_2 = cds_pair[1]
-
-    locus_tag_1 = cds_1.locus_tag
-    locus_tag_2 = cds_2.locus_tag
-
-    gene_1 = cds_1.gene
-    gene_2 = cds_2.gene
-
-    if locus_tag_1 in operons and locus_tag_2 in operons:
-        if set(operons[locus_tag_1]) & set(operons[locus_tag_2]):
-            #print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
-            concat = cds_1.translation + cds_2.translation
-            positive_samples[concat] = 1
-
-while len(negative_samples) < 250:
-
-    cds_pair = get_cds_pair(data)
-    cds_1 = cds_pair[0]
-    cds_2 = cds_pair[1]
-
-    locus_tag_1 = cds_1.locus_tag
-    locus_tag_2 = cds_2.locus_tag
-
-    gene_1 = cds_1.gene
-    gene_2 = cds_2.gene
-
-    if locus_tag_1 in operons and locus_tag_2 in operons:
-        if not (set(operons[locus_tag_1]) & set(operons[locus_tag_2])):
-            print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
-            concat = cds_1.translation + cds_2.translation
-            negative_samples[concat] = 0
+    data["values"] = np.array(sequence_data)
+    data["labels"] = np.array(labels)
+    
+    return data 

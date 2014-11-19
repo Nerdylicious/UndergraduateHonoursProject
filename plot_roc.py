@@ -8,6 +8,8 @@ from sklearn.metrics import roc_curve, auc
 
 def plot(data, to_scale, plot_title): 
 
+    print "Plotting ROC ..."
+
     X = data["values"]
     Y = data["labels"]
 
