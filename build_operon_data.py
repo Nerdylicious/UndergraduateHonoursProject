@@ -6,8 +6,6 @@ def build_operon_data_for_cross_validation(total_pos_samples, total_neg_samples,
 
     positive_samples = get_positive_samples(total_pos_samples)
     negative_samples = get_negative_samples(total_neg_samples)
-    print positive_samples
-    print negative_samples
 
     data = {}
     sequence_data = []
