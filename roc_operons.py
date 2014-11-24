@@ -1,9 +1,9 @@
 from build_operon_data import *
 from plot_roc import *
 
-total_pos_samples = 250
-total_neg_samples = 250 
-sample_size = 250 
+total_pos_samples = 200
+total_neg_samples = 200 
+sample_size = 200 
 folds = 2
 to_scale = True
 

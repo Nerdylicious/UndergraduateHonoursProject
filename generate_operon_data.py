@@ -2,6 +2,8 @@ import random
 from build_operon_dictionary import *
 from parse_genbank import *
 
+genes_used = {}
+
 def get_cds_pair(data):
 
     has_pair = False
@@ -45,10 +47,15 @@ def get_positive_samples(sample_size):
         gene_2 = cds_2.gene
 
         if locus_tag_1 in operons and locus_tag_2 in operons:
-            if set(operons[locus_tag_1]) & set(operons[locus_tag_2]):
-                #print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
-                concat_sequence = cds_1.translation + cds_2.translation
-                positive_samples.append(concat_sequence)
+            if (not locus_tag_1 in genes_used) and (not locus_tag_2 in genes_used):
+                if set(operons[locus_tag_1]) & set(operons[locus_tag_2]):
+                    #print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
+                    concat_sequence = cds_1.translation + cds_2.translation
+                    positive_samples.append(concat_sequence)
+
+                    #keep track of the genes that we've already used
+                    genes_used[locus_tag_1] = None
+                    genes_used[locus_tag_2] = None
 
     return positive_samples
 
@@ -75,9 +82,14 @@ def get_negative_samples(sample_size):
         gene_2 = cds_2.gene
 
         if locus_tag_1 in operons and locus_tag_2 in operons:
-            if not (set(operons[locus_tag_1]) & set(operons[locus_tag_2])):
-                #print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
-                concat_sequence = cds_1.translation + cds_2.translation
-                negative_samples.append(concat_sequence)
+            if (not locus_tag_1 in genes_used) and (not locus_tag_2 in genes_used):
+                if not (set(operons[locus_tag_1]) & set(operons[locus_tag_2])):
+                    #print "gene_1: [%s], gene_2: [%s]" % (gene_1, gene_2)
+                    concat_sequence = cds_1.translation + cds_2.translation
+                    negative_samples.append(concat_sequence)
+
+                    #keep track of the genes that we've already used
+                    genes_used[locus_tag_1] = None
+                    genes_used[locus_tag_2] = None
 
     return negative_samples
