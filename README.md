@@ -1,4 +1,4 @@
 Undergraduate Honours Project
 ===========================
 
-For this honours project, we are investigating the use of a new kernel based on Kolmogorov complexity to do machine learning for problems in bioninformatics using Support Vector Machines.
+Investigating the use support vector machines with a kernel based on Kolmogorov complexity to perform classification for certain problems in bioinformatics.
