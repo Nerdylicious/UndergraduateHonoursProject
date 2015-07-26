@@ -1,4 +1,4 @@
 Undergraduate Honours Project
 ===========================
 
-Investigating the use support vector machines with a kernel based on Kolmogorov complexity to perform classification for certain problems in bioinformatics.
+Investigating the use of support vector machines with a Kolmogorov complexity kernel to perform classification for certain problems in bioinformatics.
